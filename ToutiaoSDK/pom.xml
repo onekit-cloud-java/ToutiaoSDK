@@ -6,7 +6,7 @@
 
     <groupId>cn.onekit.x2x.cloud</groupId>
     <artifactId>toutiao-sdk</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.3-SNAPSHOT</version>
 
 <dependencies>
 
@@ -18,7 +18,7 @@
     <dependency>
         <groupId>cn.onekit.x2x.cloud</groupId>
         <artifactId>toutiao</artifactId>
-        <version>1.0.9-SNAPSHOT</version>
+        <version>1.0.10-SNAPSHOT</version>
     </dependency>
 </dependencies>
     <licenses>

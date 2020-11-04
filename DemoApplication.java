@@ -1,4 +1,4 @@
-package demo;
+package demo.toutiao;
 
 import org.apache.catalina.connector.Connector;
 import org.springframework.boot.SpringApplication;

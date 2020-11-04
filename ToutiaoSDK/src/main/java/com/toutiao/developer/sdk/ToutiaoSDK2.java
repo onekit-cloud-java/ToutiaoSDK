@@ -18,7 +18,7 @@ public class ToutiaoSDK2 extends ToutiaoAPI2{
             errCode errCode = new errCode();
             throw errCode;
         }
-        if(result.has("error")) {
+        if(result.has("error")&& result.get("error").getAsInt()!=0) {
             throw new Gson().fromJson(result, errCode.class);
         }
         return  new Gson().fromJson(result, tags$text$antidirt_response.class);
@@ -34,7 +34,7 @@ public class ToutiaoSDK2 extends ToutiaoAPI2{
             errCode errCode = new errCode();
             throw errCode;
         }
-        if(result.has("error")) {
+        if(result.has("error")&& result.get("error").getAsInt()!=0) {
             throw new Gson().fromJson(result, errCode.class);
         }
         return  new Gson().fromJson(result, tags$image_response.class);

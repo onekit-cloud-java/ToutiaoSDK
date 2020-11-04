@@ -1,4 +1,4 @@
-const SERVER = 'https://localhost:40080'
+const SERVER = 'https://localhost:40443'
 const API = `${SERVER}/toutiao_demo/`
 const header = {'content-type': "application/x-www-form-urlencoded"}
 var code, anonymous_code,openid,session_key,unionid,anonymous_openid,access_token;

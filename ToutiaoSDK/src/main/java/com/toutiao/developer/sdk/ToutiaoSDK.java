@@ -62,7 +62,7 @@ public class ToutiaoSDK extends ToutiaoAPI {
             errCode errCode = new errCode();
             throw errCode;
         }
-        if(result.has("error")) {
+        if(result.has("error") && result.get("error").getAsInt()!=0) {
             throw new Gson().fromJson(result, errCode.class);
         }
         return  new Gson().fromJson(result,apps$jscode2session_response.class);
@@ -83,7 +83,7 @@ public class ToutiaoSDK extends ToutiaoAPI {
             errCode errCode = new errCode();
             throw errCode;
         }
-        if(result.has("error")) {
+        if(result.has("error")&& result.get("error").getAsInt()!=0) {
             throw new Gson().fromJson(result, errCode.class);
         }
         return  new Gson().fromJson(result,apps$set_user_storage_response.class);
@@ -105,7 +105,7 @@ public class ToutiaoSDK extends ToutiaoAPI {
             errCode errCode = new errCode();
             throw errCode;
         }
-        if(result.has("error")) {
+        if(result.has("error")&& result.get("error").getAsInt()!=0) {
             throw new Gson().fromJson(result, errCode.class);
         }
         return  new Gson().fromJson(result,apps$remove_user_storage_response.class);
@@ -121,9 +121,13 @@ public class ToutiaoSDK extends ToutiaoAPI {
             errCode errCode = new errCode();
             throw errCode;
         }
-        JsonObject result = (JsonObject) new JsonParser().parse(    Base64.encodeBase64String(bytes));
-        if(result.has("error")) {
-            throw new Gson().fromJson(result, errCode.class);
+        try {
+            JsonObject result = (JsonObject) new JsonParser().parse(Base64.encodeBase64String(bytes));
+            if (result.has("error") && result.get("error").getAsInt() != 0) {
+                throw new Gson().fromJson(result, errCode.class);
+            }
+        }catch(Exception e){
+
         }
         return bytes;
     }
@@ -138,7 +142,7 @@ public class ToutiaoSDK extends ToutiaoAPI {
             errCode errCode = new errCode();
             throw errCode;
         }
-        if(result.has("error")) {
+        if(result.has("error")&& result.get("error").getAsInt()!=0) {
             throw new Gson().fromJson(result, errCode.class);
         }
         return  new Gson().fromJson(result,apps$game$template$send_response.class);
@@ -154,7 +158,7 @@ public class ToutiaoSDK extends ToutiaoAPI {
             errCode errCode = new errCode();
             throw errCode;
         }
-        if(result.has("error")) {
+        if(result.has("error")&& result.get("error").getAsInt()!=0) {
             throw new Gson().fromJson(result, errCode.class);
         }
         return  new Gson().fromJson(result,apps$subscribe_notification$developer$v1$notify_response.class);

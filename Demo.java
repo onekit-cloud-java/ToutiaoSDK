@@ -1,4 +1,4 @@
-package demo;
+package demo.toutiao;
 
 import com.toutiao.developer.Kvltem;
 import com.toutiao.developer.RGB;
