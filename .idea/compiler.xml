@@ -7,17 +7,19 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ToutiaoSDK" />
-        <module name="demo-toutiao" />
+        <module name="demo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="demo" target="1.8" />
+      <module name="demo-toutiao" target="1.8" />
+      <module name="toutiao" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="demo" options="-parameters" />
       <module name="demo-toutiao" options="-parameters" />
+      <module name="toutiao" options="-parameters" />
     </option>
   </component>
 </project>

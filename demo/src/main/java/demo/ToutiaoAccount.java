@@ -1,4 +1,4 @@
-package demo.toutiao;
+package demo;
 
 public class ToutiaoAccount {
 

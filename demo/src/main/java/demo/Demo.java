@@ -1,4 +1,4 @@
-package demo.toutiao;
+package demo;
 
 import com.google.gson.Gson;
 import com.toutiao.developer.Kvltem;
