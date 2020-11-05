@@ -6,19 +6,21 @@
 
     <groupId>cn.onekit.x2x.cloud</groupId>
     <artifactId>toutiao-sdk</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
-
+    <version>1.1.1</version>
+    <name>ToutiaoSDK</name>
+    <url>https://github.com/onekit-cloud-java/toutiaosdk</url>
+    <description>toutiao cloud sdk</description>
 <dependencies>
 
     <dependency>
         <groupId>cn.onekit.x2x.cloud</groupId>
         <artifactId>thekit</artifactId>
-        <version>1.0.3-SNAPSHOT</version>
+        <version>1.1.1</version>
     </dependency>
     <dependency>
         <groupId>cn.onekit.x2x.cloud</groupId>
         <artifactId>toutiao</artifactId>
-        <version>1.0.10-SNAPSHOT</version>
+        <version>1.1.1</version>
     </dependency>
 </dependencies>
     <licenses>
