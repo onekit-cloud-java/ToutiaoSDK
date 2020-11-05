@@ -1,6 +1,6 @@
 package demo;
 
-import com.google.gson.Gson;
+import cn.onekit.thekit.JSON;
 import com.toutiao.developer.Kvltem;
 import com.toutiao.developer.RGB;
 import com.toutiao.developer.ToutiaoAPI;
@@ -49,7 +49,7 @@ public class Demo {
             add(new Kvltem("key1", "value1"));
         }});
 
-        String signature = ToutiaoSDK.crypto(sig_method, session_key, new Gson().toJson(body));
+        String signature = ToutiaoSDK.crypto(sig_method, session_key, JSON.object2json(body).toString());
         return new ToutiaoSDK().apps$set_user_storage(
                 access_token,
                 openid,
@@ -68,7 +68,7 @@ public class Demo {
         body.setKey(new ArrayList<String>() {{
             add("key1");
         }});
-        String signature = ToutiaoSDK.crypto(sig_method, session_key, new Gson().toJson(body));
+        String signature = ToutiaoSDK.crypto(sig_method, session_key, JSON.object2json(body).toString());
         return new ToutiaoSDK().apps$remove_user_storage(
                 access_token,
                 openid,

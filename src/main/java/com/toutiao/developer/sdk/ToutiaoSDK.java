@@ -1,10 +1,9 @@
 package com.toutiao.developer.sdk;
 import cn.onekit.thekit.AJAX;
 import cn.onekit.thekit.Crypto;
+import cn.onekit.thekit.JSON;
 import cn.onekit.thekit.STRING;
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.toutiao.developer.ToutiaoAPI;
 import org.apache.commons.codec.binary.Base64;
 
@@ -21,14 +20,14 @@ public class ToutiaoSDK extends ToutiaoAPI {
             default:
                 throw new Exception(sig_method);
         }
-        return new Crypto(method).encode(session_key,data);
+        return new Crypto(method).encode(session_key, data);
     }
 
     @Override
     public apps$token_response apps$token(String appid, String secret, String grant_type) throws errCode {
         final JsonObject result;
         try {
-            result = (JsonObject) new JsonParser().parse(AJAX.request("https://developer.toutiao.com/api/apps/token", "get", new HashMap<String, String>() {{
+            result = (JsonObject) JSON.parse(AJAX.request("https://developer.toutiao.com/api/apps/token", "get", new HashMap<String, String>() {{
                 put("appid", appid);
                 put("secret", secret);
                 put("grant_type", grant_type);
@@ -37,10 +36,10 @@ public class ToutiaoSDK extends ToutiaoAPI {
             errCode errCode = new errCode();
             throw errCode;
         }
-        if(result.has("error")) {
-            throw new Gson().fromJson(result, errCode.class);
+        if (result.has("error")) {
+            throw JSON.json2object(result, errCode.class);
         }
-        return  new Gson().fromJson(result,apps$token_response.class);
+        return JSON.json2object(result, apps$token_response.class);
     }
 
     @Override
@@ -57,23 +56,23 @@ public class ToutiaoSDK extends ToutiaoAPI {
                     put("anonymous_code", anonymous_code);
                 }
             }};
-            result = (JsonObject) new JsonParser().parse(AJAX.request("https://developer.toutiao.com/api/apps/jscode2session", "get", request));
+            result = (JsonObject) JSON.parse(AJAX.request("https://developer.toutiao.com/api/apps/jscode2session", "get", request));
         } catch (Exception e) {
             errCode errCode = new errCode();
             throw errCode;
         }
-        if(result.has("error") && result.get("error").getAsInt()!=0) {
-            throw new Gson().fromJson(result, errCode.class);
+        if (result.has("error") && result.get("error").getAsInt() != 0) {
+            throw JSON.json2object(result, errCode.class);
         }
-        return  new Gson().fromJson(result,apps$jscode2session_response.class);
+        return JSON.json2object(result, apps$jscode2session_response.class);
     }
 
     @Override
     public apps$set_user_storage_response apps$set_user_storage(String access_token, String openid, String signature, String sig_method, apps$set_user_storage_body body) throws errCode {
         final JsonObject result;
         try {
-            JsonObject post_body = (JsonObject) new Gson().toJsonTree(body);
-            result = (JsonObject) new JsonParser().parse(AJAX.request(String.format("https://developer.toutiao.com/api/apps/set_user_storage?access_token=%s&openid=%s&sig_method=%s&signature=%s",
+            JsonObject post_body = (JsonObject) JSON.object2json(body);
+            result = (JsonObject) JSON.parse(AJAX.request(String.format("https://developer.toutiao.com/api/apps/set_user_storage?access_token=%s&openid=%s&sig_method=%s&signature=%s",
                     access_token,
                     openid,
                     sig_method,
@@ -83,18 +82,18 @@ public class ToutiaoSDK extends ToutiaoAPI {
             errCode errCode = new errCode();
             throw errCode;
         }
-        if(result.has("error")&& result.get("error").getAsInt()!=0) {
-            throw new Gson().fromJson(result, errCode.class);
+        if (result.has("error") && result.get("error").getAsInt() != 0) {
+            throw JSON.json2object(result, errCode.class);
         }
-        return  new Gson().fromJson(result,apps$set_user_storage_response.class);
+        return JSON.json2object(result, apps$set_user_storage_response.class);
     }
 
     @Override
     public apps$remove_user_storage_response apps$remove_user_storage(String access_token, String openid, String signature, String sig_method, apps$remove_user_storage_body body) throws errCode {
         final JsonObject result;
         try {
-            JsonObject post_body = (JsonObject) new Gson().toJsonTree(body);
-            result = (JsonObject) new JsonParser().parse(AJAX.request(String.format("https://developer.toutiao.com/api/apps/remove_user_storage?access_token=%s&openid=%s&sig_method=%s&signature=%s",
+            JsonObject post_body = (JsonObject) JSON.object2json(body);
+            result = (JsonObject) JSON.parse(AJAX.request(String.format("https://developer.toutiao.com/api/apps/remove_user_storage?access_token=%s&openid=%s&sig_method=%s&signature=%s",
 
                     access_token,
                     openid,
@@ -105,62 +104,62 @@ public class ToutiaoSDK extends ToutiaoAPI {
             errCode errCode = new errCode();
             throw errCode;
         }
-        if(result.has("error")&& result.get("error").getAsInt()!=0) {
-            throw new Gson().fromJson(result, errCode.class);
+        if (result.has("error") && result.get("error").getAsInt() != 0) {
+            throw JSON.json2object(result, errCode.class);
         }
-        return  new Gson().fromJson(result,apps$remove_user_storage_response.class);
+        return JSON.json2object(result, apps$remove_user_storage_response.class);
     }
 
     @Override
-    public byte[] apps$qrcode(apps$qrcode_body request) throws errCode{
+    public byte[] apps$qrcode(apps$qrcode_body request) throws errCode {
         final byte[] bytes;
         try {
-            JsonObject post_body = (JsonObject) new Gson().toJsonTree(request);
+            JsonObject post_body = (JsonObject) JSON.object2json(request);
             bytes = AJAX.download("https://developer.toutiao.com/api/apps/qrcode", "post", post_body.toString());
-        }catch (Exception e){
+        } catch (Exception e) {
             errCode errCode = new errCode();
             throw errCode;
         }
         try {
-            JsonObject result = (JsonObject) new JsonParser().parse(Base64.encodeBase64String(bytes));
+            JsonObject result = (JsonObject) JSON.parse(Base64.encodeBase64String(bytes));
             if (result.has("error") && result.get("error").getAsInt() != 0) {
-                throw new Gson().fromJson(result, errCode.class);
+                throw JSON.json2object(result, errCode.class);
             }
-        }catch(Exception e){
+        } catch (Exception e) {
 
         }
         return bytes;
     }
 
     @Override
-    public apps$game$template$send_response apps$game$template$send(String X_Token, apps$game$template$send_body request) throws errCode{
+    public apps$game$template$send_response apps$game$template$send(String X_Token, apps$game$template$send_body request) throws errCode {
         final JsonObject result;
         try {
-            JsonObject post_body = (JsonObject) new Gson().toJsonTree(request);
-            result = (JsonObject) new JsonParser().parse(AJAX.request("https://developer.toutiao.com/api/apps/game/template/send", "post", post_body.toString()));
+            JsonObject post_body = (JsonObject) JSON.object2json(request);
+            result = (JsonObject) JSON.parse(AJAX.request("https://developer.toutiao.com/api/apps/game/template/send", "post", post_body.toString()));
         } catch (Exception e) {
             errCode errCode = new errCode();
             throw errCode;
         }
-        if(result.has("error")&& result.get("error").getAsInt()!=0) {
-            throw new Gson().fromJson(result, errCode.class);
+        if (result.has("error") && result.get("error").getAsInt() != 0) {
+            throw JSON.json2object(result, errCode.class);
         }
-        return  new Gson().fromJson(result,apps$game$template$send_response.class);
+        return JSON.json2object(result, apps$game$template$send_response.class);
     }
 
     @Override
-    public apps$subscribe_notification$developer$v1$notify_response apps$subscribe_notification$developer$v1$notify(apps$subscribe_notification$developer$v1$notify_body request) throws errCode{
+    public apps$subscribe_notification$developer$v1$notify_response apps$subscribe_notification$developer$v1$notify(apps$subscribe_notification$developer$v1$notify_body request) throws errCode {
         final JsonObject result;
         try {
-            JsonObject post_body = (JsonObject) new Gson().toJsonTree(request);
-            result = (JsonObject) new JsonParser().parse(AJAX.request("https://developer.toutiao.com/api/apps/game/template/send", "post", post_body.toString()));
+            JsonObject post_body = (JsonObject) JSON.object2json(request);
+            result = (JsonObject) JSON.parse(AJAX.request("https://developer.toutiao.com/api/apps/game/template/send", "post", post_body.toString()));
         } catch (Exception e) {
             errCode errCode = new errCode();
             throw errCode;
         }
-        if(result.has("error")&& result.get("error").getAsInt()!=0) {
-            throw new Gson().fromJson(result, errCode.class);
+        if (result.has("error") && result.get("error").getAsInt() != 0) {
+            throw JSON.json2object(result, errCode.class);
         }
-        return  new Gson().fromJson(result,apps$subscribe_notification$developer$v1$notify_response.class);
+        return JSON.json2object(result, apps$subscribe_notification$developer$v1$notify_response.class);
     }
 }
