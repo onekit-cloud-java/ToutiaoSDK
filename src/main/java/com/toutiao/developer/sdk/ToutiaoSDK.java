@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class ToutiaoSDK extends ToutiaoAPI {
     @Override
-     public String crypto(String sig_method, String session_key, String data) throws Exception {
+    public String crypto(String sig_method, String session_key, String data) throws Exception {
         Crypto.Method method;
         switch (sig_method) {
             case "hmac_sha256":
@@ -134,7 +134,7 @@ public class ToutiaoSDK extends ToutiaoAPI {
 
     @Override
     public apps$game$template$send_response apps$game$template$send(apps$game$template$send_body request) throws errCode {
-         final JsonObject result;
+        final JsonObject result;
         try {
             JsonObject post_body = (JsonObject) JSON.object2json(request);
             result = (JsonObject) JSON.parse(AJAX.request("https://developer.toutiao.com/api/apps/game/template/send", "post", post_body.toString()));
