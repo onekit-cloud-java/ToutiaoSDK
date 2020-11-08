@@ -91,4 +91,19 @@ public class Demo {
         body.setSet_icon(true);
         return Base64.encodeBase64String(new ToutiaoSDK().apps$qrcode(body));
     }
+
+    @RequestMapping("/createQRCode")
+    public String checkContent(
+            @RequestParam String access_token
+    ) throws Exception {
+        ToutiaoAPI.apps$qrcode_body body = new ToutiaoAPI.apps$qrcode_body();
+        body.setAccess_token(access_token);
+        body.setAppname("toutiao");
+        body.setPath(URLEncoder.encode("pages/index/index", "utf-8"));
+        body.setWidth(500);
+        body.setLine_color(new RGB(255, 0, 0));
+        body.setBackground(new RGB(0, 255, 0));
+        body.setSet_icon(true);
+        return Base64.encodeBase64String(new ToutiaoSDK().apps$qrcode(body));
+    }
 }

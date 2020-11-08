@@ -5,12 +5,17 @@ import com.toutiao.developer.ToutiaoAPI2;
 import cn.onekit.thekit.AJAX;
 import com.google.gson.JsonObject;
 
+import java.util.HashMap;
+
 public class ToutiaoSDK2 extends ToutiaoAPI2 {
 
     @Override
     public tags$text$antidirt_response tags$text$antidirt(String X_Token, ToutiaoAPI2.tags$text$antidirt_body body) throws errCode {
         final JsonObject result;
         try {
+            AJAX.headers = new HashMap<String, String>() {{
+                put("X-Token", X_Token);
+            }};
             JsonObject post_body = (JsonObject) JSON.object2json(body);
             result = (JsonObject) JSON.parse(AJAX.request("https://developer.toutiao.com/api/v2/tags/text/antidirt", "post", post_body.toString()));
         } catch (Exception e) {
@@ -27,6 +32,9 @@ public class ToutiaoSDK2 extends ToutiaoAPI2 {
     public tags$image_response tags$image(String X_Token, tags$image_body body) throws errCode {
         final JsonObject result;
         try {
+            AJAX.headers = new HashMap<String, String>() {{
+                put("X-Token", X_Token);
+            }};
             JsonObject post_body = (JsonObject) JSON.object2json(body);
             result = (JsonObject) JSON.parse(AJAX.request("https://developer.toutiao.com/api/v2/tags/image/", "post", post_body.toString()));
         } catch (Exception e) {
