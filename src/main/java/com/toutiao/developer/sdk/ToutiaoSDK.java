@@ -28,7 +28,8 @@ public class ToutiaoSDK extends ToutiaoAPI {
     public apps$token_response apps$token(String appid, String secret, String grant_type) throws errCode {
         final JsonObject result;
         try {
-            result = (JsonObject) JSON.parse(AJAX.request("https://developer.toutiao.com/api/apps/token", "get", new HashMap<String, String>() {{
+            String url = "https://developer.toutiao.com/api/apps/token";
+            result = (JsonObject) JSON.parse(AJAX.request(url, "get", new HashMap<String, String>() {{
                 put("appid", appid);
                 put("secret", secret);
                 put("grant_type", grant_type);
@@ -47,6 +48,7 @@ public class ToutiaoSDK extends ToutiaoAPI {
     public apps$jscode2session_response apps$jscode2session(String appid, String secret, String code, String anonymous_code) throws errCode {
         final JsonObject result;
         try {
+            String url = "https://developer.toutiao.com/api/apps/jscode2session";
             Map<String, String> request = new HashMap<String, String>() {{
                 put("appid", appid);
                 put("secret", secret);
@@ -57,7 +59,7 @@ public class ToutiaoSDK extends ToutiaoAPI {
                     put("anonymous_code", anonymous_code);
                 }
             }};
-            result = (JsonObject) JSON.parse(AJAX.request("https://developer.toutiao.com/api/apps/jscode2session", "get", request));
+            result = (JsonObject) JSON.parse(AJAX.request(url, "get", request));
         } catch (Exception e) {
             errCode errCode = new errCode();
             throw errCode;
@@ -72,13 +74,14 @@ public class ToutiaoSDK extends ToutiaoAPI {
     public apps$set_user_storage_response apps$set_user_storage(String access_token, String openid, String signature, String sig_method, apps$set_user_storage_body body) throws errCode {
         final JsonObject result;
         try {
-            JsonObject post_body = (JsonObject) JSON.object2json(body);
-            result = (JsonObject) JSON.parse(AJAX.request(String.format("https://developer.toutiao.com/api/apps/set_user_storage?access_token=%s&openid=%s&sig_method=%s&signature=%s",
+            String url = String.format("https://developer.toutiao.com/api/apps/set_user_storage?access_token=%s&openid=%s&sig_method=%s&signature=%s",
                     access_token,
                     openid,
                     sig_method,
                     signature
-            ), "post", post_body.toString()));
+            );
+            JsonObject post_body = (JsonObject) JSON.object2json(body);
+            result = (JsonObject) JSON.parse(AJAX.request(url, "post", post_body.toString()));
         } catch (Exception e) {
             errCode errCode = new errCode();
             throw errCode;
@@ -93,14 +96,13 @@ public class ToutiaoSDK extends ToutiaoAPI {
     public apps$remove_user_storage_response apps$remove_user_storage(String access_token, String openid, String signature, String sig_method, apps$remove_user_storage_body body) throws errCode {
         final JsonObject result;
         try {
-            JsonObject post_body = (JsonObject) JSON.object2json(body);
-            result = (JsonObject) JSON.parse(AJAX.request(String.format("https://developer.toutiao.com/api/apps/remove_user_storage?access_token=%s&openid=%s&sig_method=%s&signature=%s",
-
+            String url = String.format("https://developer.toutiao.com/api/apps/remove_user_storage?access_token=%s&openid=%s&sig_method=%s&signature=%s",
                     access_token,
                     openid,
                     sig_method,
-                    signature
-            ), "post", post_body.toString()));
+                    signature);
+            JsonObject post_body = (JsonObject) JSON.object2json(body);
+            result = (JsonObject) JSON.parse(AJAX.request(url, "post", post_body.toString()));
         } catch (Exception e) {
             errCode errCode = new errCode();
             throw errCode;
@@ -115,8 +117,9 @@ public class ToutiaoSDK extends ToutiaoAPI {
     public byte[] apps$qrcode(apps$qrcode_body request) throws errCode {
         final byte[] bytes;
         try {
+            String url = "https://developer.toutiao.com/api/apps/qrcode";
             JsonObject post_body = (JsonObject) JSON.object2json(request);
-            bytes = AJAX.download("https://developer.toutiao.com/api/apps/qrcode", "post", post_body.toString());
+            bytes = AJAX.download(url, "post", post_body.toString());
         } catch (Exception e) {
             errCode errCode = new errCode();
             throw errCode;
@@ -136,8 +139,9 @@ public class ToutiaoSDK extends ToutiaoAPI {
     public apps$game$template$send_response apps$game$template$send(apps$game$template$send_body request) throws errCode {
         final JsonObject result;
         try {
+            String url = "https://developer.toutiao.com/api/apps/game/template/send";
             JsonObject post_body = (JsonObject) JSON.object2json(request);
-            result = (JsonObject) JSON.parse(AJAX.request("https://developer.toutiao.com/api/apps/game/template/send", "post", post_body.toString()));
+            result = (JsonObject) JSON.parse(AJAX.request(url, "post", post_body.toString()));
         } catch (Exception e) {
             errCode errCode = new errCode();
             throw errCode;
@@ -152,8 +156,9 @@ public class ToutiaoSDK extends ToutiaoAPI {
     public apps$subscribe_notification$developer$v1$notify_response apps$subscribe_notification$developer$v1$notify(apps$subscribe_notification$developer$v1$notify_body request) throws errCode {
         final JsonObject result;
         try {
+            String url = "https://developer.toutiao.com/api/apps/game/template/send";
             JsonObject post_body = (JsonObject) JSON.object2json(request);
-            result = (JsonObject) JSON.parse(AJAX.request("https://developer.toutiao.com/api/apps/game/template/send", "post", post_body.toString()));
+            result = (JsonObject) JSON.parse(AJAX.request(url, "post", post_body.toString()));
         } catch (Exception e) {
             errCode errCode = new errCode();
             throw errCode;
