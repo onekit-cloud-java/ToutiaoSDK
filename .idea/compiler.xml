@@ -7,8 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ToutiaoSDK" />
-        <module name="toutiao-sdk" />
         <module name="demo" />
+        <module name="toutiao-sdk" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
