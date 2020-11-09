@@ -19,38 +19,38 @@ public class Demo {
     final String sig_method = "hmac_sha256";
 
     @RequestMapping("/getAccessToken")
-    public apps$token_response getAccessToken() throws Exception {
-        return new ToutiaoSDK().apps$token(ToutiaoAccount.appid, ToutiaoAccount.secret, "client_credential");
+    public apps__token_response getAccessToken() throws Exception {
+        return new ToutiaoSDK().apps__token(ToutiaoAccount.appid, ToutiaoAccount.secret, "client_credential");
     }
 
     @RequestMapping("/code2Session1")
-    public apps$jscode2session_response code2Session1(
+    public apps__jscode2session_response code2Session1(
             @RequestParam String code) throws Exception {
-        return new ToutiaoSDK().apps$jscode2session(ToutiaoAccount.appid, ToutiaoAccount.secret, code, null);
+        return new ToutiaoSDK().apps__jscode2session(ToutiaoAccount.appid, ToutiaoAccount.secret, code, null);
 
     }
 
     @RequestMapping("/code2Session2")
-    public apps$jscode2session_response code2Session2(
+    public apps__jscode2session_response code2Session2(
             @RequestParam String anonymous_code) throws Exception {
-        return new ToutiaoSDK().apps$jscode2session(ToutiaoAccount.appid, ToutiaoAccount.secret, null, anonymous_code);
+        return new ToutiaoSDK().apps__jscode2session(ToutiaoAccount.appid, ToutiaoAccount.secret, null, anonymous_code);
     }
 
 
     @RequestMapping("/setUserStorage")
-    public apps$set_user_storage_response setUserStorage(
+    public apps__set_user_storage_response setUserStorage(
             @RequestParam String session_key,
             @RequestParam String access_token,
             @RequestParam String openid
     ) throws Exception {
         ToutiaoSDK ToutiaoSDK = new ToutiaoSDK();
-        apps$set_user_storage_body body = new apps$set_user_storage_body();
+        apps__set_user_storage_body body = new apps__set_user_storage_body();
         body.setTt_kv_list(new ArrayList<KV>() {{
             add(new KV("key1", "value1"));
         }});
 
         String signature = ToutiaoSDK._crypto(sig_method, session_key, JSON.object2json(body).toString());
-        return ToutiaoSDK.apps$set_user_storage(
+        return ToutiaoSDK.apps__set_user_storage(
                 access_token,
                 openid,
                 signature,
@@ -59,18 +59,18 @@ public class Demo {
     }
 
     @RequestMapping("/removeUserStorage")
-    public apps$remove_user_storage_response removeUserStorage(
+    public apps__remove_user_storage_response removeUserStorage(
             @RequestParam String session_key,
             @RequestParam String access_token,
             @RequestParam String openid
     ) throws Exception {
         ToutiaoSDK ToutiaoSDK = new ToutiaoSDK();
-        apps$remove_user_storage_body body = new apps$remove_user_storage_body();
+        apps__remove_user_storage_body body = new apps__remove_user_storage_body();
         body.setKey(new ArrayList<String>() {{
             add("key1");
         }});
         String signature = ToutiaoSDK._crypto(sig_method, session_key, JSON.object2json(body).toString());
-        return ToutiaoSDK.apps$remove_user_storage(
+        return ToutiaoSDK.apps__remove_user_storage(
                 access_token,
                 openid,
                 signature,
@@ -82,7 +82,7 @@ public class Demo {
     public String createQRCode(
             @RequestParam String access_token
     ) throws Exception {
-        apps$qrcode_body body = new apps$qrcode_body();
+        apps__qrcode_body body = new apps__qrcode_body();
         body.setAccess_token(access_token);
         body.setAppname("toutiao");
         body.setPath(URLEncoder.encode("pages/index/index", "utf-8"));
@@ -90,30 +90,30 @@ public class Demo {
         body.setLine_color(new RGB(255, 0, 0));
         body.setBackground(new RGB(0, 255, 0));
         body.setSet_icon(true);
-        return Base64.encodeBase64String(new ToutiaoSDK().apps$qrcode(body));
+        return Base64.encodeBase64String(new ToutiaoSDK().apps__qrcode(body));
     }
 
     @RequestMapping("/checkContent")
-    public tags$text$antidirt_response checkContent(
+    public tags__text__antidirt_response checkContent(
             @RequestParam String access_token,
             @RequestParam String content
     ) throws Exception {
-        tags$text$antidirt_body.Task task=new tags$text$antidirt_body.Task();
+        tags__text__antidirt_body.Task task=new tags__text__antidirt_body.Task();
         task.setContent(content);
         //
-        tags$text$antidirt_body body = new tags$text$antidirt_body();
-        body.setTasks(new ArrayList<tags$text$antidirt_body.Task>(){{add(task);}});
-        return new ToutiaoSDK2().tags$text$antidirt(access_token,body);
+        tags__text__antidirt_body body = new tags__text__antidirt_body();
+        body.setTasks(new ArrayList<tags__text__antidirt_body.Task>(){{add(task);}});
+        return new ToutiaoSDK2().tags__text__antidirt(access_token,body);
     }
     @RequestMapping("/checkImage")
-    public tags$image_response checkImage(
+    public tags__image_response checkImage(
             @RequestParam String access_token
     ) throws Exception {
-        tags$image_body.Task task = new tags$image_body.Task();
+        tags__image_body.Task task = new tags__image_body.Task();
         task.setImage("https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png");
         //
-        tags$image_body body = new tags$image_body();
-        body.setTasks(new ArrayList<tags$image_body.Task>(){{add(task);}});
-        return new ToutiaoSDK2().tags$image(access_token,body);
+        tags__image_body body = new tags__image_body();
+        body.setTasks(new ArrayList<tags__image_body.Task>(){{add(task);}});
+        return new ToutiaoSDK2().tags__image(access_token,body);
     }
 }

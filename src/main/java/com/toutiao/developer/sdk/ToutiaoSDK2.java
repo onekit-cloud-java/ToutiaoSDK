@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class ToutiaoSDK2 implements ToutiaoAPI2 {
 
     
-    public tags$text$antidirt_response tags$text$antidirt(String X_Token, tags$text$antidirt_body body) throws ToutiaoError {
+    public tags__text__antidirt_response tags__text__antidirt(String X_Token, tags__text__antidirt_body body) throws ToutiaoError {
         final JsonObject result;
         try {
             AJAX.headers = new HashMap<String, String>() {{
@@ -26,11 +26,11 @@ public class ToutiaoSDK2 implements ToutiaoAPI2 {
         if (result.has("error") && result.get("error").getAsInt() != 0) {
             throw JSON.json2object(result, ToutiaoError.class);
         }
-        return JSON.json2object(result, tags$text$antidirt_response.class);
+        return JSON.json2object(result, tags__text__antidirt_response.class);
     }
 
     
-    public tags$image_response tags$image(String X_Token, tags$image_body body) throws ToutiaoError {
+    public tags__image_response tags__image(String X_Token, tags__image_body body) throws ToutiaoError {
         final JsonObject result;
         try {
             AJAX.headers = new HashMap<String, String>() {{
@@ -45,6 +45,6 @@ public class ToutiaoSDK2 implements ToutiaoAPI2 {
         if (result.has("error") && result.get("error").getAsInt() != 0) {
             throw JSON.json2object(result, ToutiaoError.class);
         }
-        return JSON.json2object(result, tags$image_response.class);
+        return JSON.json2object(result, tags__image_response.class);
     }
 }

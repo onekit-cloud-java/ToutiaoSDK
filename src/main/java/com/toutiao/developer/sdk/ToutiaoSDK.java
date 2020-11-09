@@ -8,7 +8,6 @@ import com.toutiao.developer.ToutiaoAPI;
 import com.toutiao.developer.entity.*;
 import org.apache.commons.codec.binary.Base64;
 import java.util.HashMap;
-import java.util.Map;
 
 public class ToutiaoSDK implements ToutiaoAPI {
     
@@ -25,7 +24,7 @@ public class ToutiaoSDK implements ToutiaoAPI {
     }
 
     
-    public apps$token_response apps$token(String appid, String secret, String grant_type) throws ToutiaoError {
+    public apps__token_response apps__token(String appid, String secret, String grant_type) throws ToutiaoError {
         final JsonObject result;
         try {
             String url = "https://developer.toutiao.com/api/apps/token";
@@ -41,15 +40,15 @@ public class ToutiaoSDK implements ToutiaoAPI {
         if (result.has("error")) {
             throw JSON.json2object(result, ToutiaoError.class);
         }
-        return JSON.json2object(result, apps$token_response.class);
+        return JSON.json2object(result, apps__token_response.class);
     }
 
     
-    public apps$jscode2session_response apps$jscode2session(String appid, String secret, String code, String anonymous_code) throws ToutiaoError {
+    public apps__jscode2session_response apps__jscode2session(String appid, String secret, String code, String anonymous_code) throws ToutiaoError {
         final JsonObject result;
         try {
             String url = "https://developer.toutiao.com/api/apps/jscode2session";
-            Map<String, String> request = new HashMap<String, String>() {{
+            HashMap<String, String> request = new HashMap<String, String>() {{
                 put("appid", appid);
                 put("secret", secret);
                 if (!STRING.isEmpty(code)) {
@@ -67,11 +66,11 @@ public class ToutiaoSDK implements ToutiaoAPI {
         if (result.has("error") && result.get("error").getAsInt() != 0) {
             throw JSON.json2object(result, ToutiaoError.class);
         }
-        return JSON.json2object(result, apps$jscode2session_response.class);
+        return JSON.json2object(result, apps__jscode2session_response.class);
     }
 
     
-    public apps$set_user_storage_response apps$set_user_storage(String access_token, String openid, String signature, String sig_method, apps$set_user_storage_body body) throws ToutiaoError {
+    public apps__set_user_storage_response apps__set_user_storage(String access_token, String openid, String signature, String sig_method, apps__set_user_storage_body body) throws ToutiaoError {
         final JsonObject result;
         try {
             String url = String.format("https://developer.toutiao.com/api/apps/set_user_storage?access_token=%s&openid=%s&sig_method=%s&signature=%s",
@@ -89,11 +88,11 @@ public class ToutiaoSDK implements ToutiaoAPI {
         if (result.has("error") && result.get("error").getAsInt() != 0) {
             throw JSON.json2object(result, ToutiaoError.class);
         }
-        return JSON.json2object(result, apps$set_user_storage_response.class);
+        return JSON.json2object(result, apps__set_user_storage_response.class);
     }
 
     
-    public apps$remove_user_storage_response apps$remove_user_storage(String access_token, String openid, String signature, String sig_method, apps$remove_user_storage_body body) throws ToutiaoError {
+    public apps__remove_user_storage_response apps__remove_user_storage(String access_token, String openid, String signature, String sig_method, apps__remove_user_storage_body body) throws ToutiaoError {
         final JsonObject result;
         try {
             String url = String.format("https://developer.toutiao.com/api/apps/remove_user_storage?access_token=%s&openid=%s&sig_method=%s&signature=%s",
@@ -110,11 +109,11 @@ public class ToutiaoSDK implements ToutiaoAPI {
         if (result.has("error") && result.get("error").getAsInt() != 0) {
             throw JSON.json2object(result, ToutiaoError.class);
         }
-        return JSON.json2object(result, apps$remove_user_storage_response.class);
+        return JSON.json2object(result, apps__remove_user_storage_response.class);
     }
 
     
-    public byte[] apps$qrcode(apps$qrcode_body request) throws ToutiaoError {
+    public byte[] apps__qrcode(apps__qrcode_body request) throws ToutiaoError {
         final byte[] bytes;
         try {
             String url = "https://developer.toutiao.com/api/apps/qrcode";
@@ -136,7 +135,7 @@ public class ToutiaoSDK implements ToutiaoAPI {
     }
 
     
-    public apps$game$template$send_response apps$game$template$send(apps$game$template$send_body request) throws ToutiaoError {
+    public apps__game__template__send_response apps__game__template__send(apps__game__template__send_body request) throws ToutiaoError {
         final JsonObject result;
         try {
             String url = "https://developer.toutiao.com/api/apps/game/template/send";
@@ -149,11 +148,11 @@ public class ToutiaoSDK implements ToutiaoAPI {
         if (result.has("error") && result.get("error").getAsInt() != 0) {
             throw JSON.json2object(result, ToutiaoError.class);
         }
-        return JSON.json2object(result, apps$game$template$send_response.class);
+        return JSON.json2object(result, apps__game__template__send_response.class);
     }
 
     
-    public apps$subscribe_notification$developer$v1$notify_response apps$subscribe_notification$developer$v1$notify(apps$subscribe_notification$developer$v1$notify_body request) throws ToutiaoError {
+    public apps__subscribe_notification__developer__notify_response apps__subscribe_notification__developer__notify(apps__subscribe_notification__developer__notify_body request) throws ToutiaoError {
         final JsonObject result;
         try {
             String url = "https://developer.toutiao.com/api/apps/game/template/send";
@@ -166,6 +165,6 @@ public class ToutiaoSDK implements ToutiaoAPI {
         if (result.has("error") && result.get("error").getAsInt() != 0) {
             throw JSON.json2object(result, ToutiaoError.class);
         }
-        return JSON.json2object(result, apps$subscribe_notification$developer$v1$notify_response.class);
+        return JSON.json2object(result, apps__subscribe_notification__developer__notify_response.class);
     }
 }
