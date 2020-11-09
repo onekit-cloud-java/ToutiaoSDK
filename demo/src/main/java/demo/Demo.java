@@ -96,7 +96,7 @@ public class Demo {
     }
 
     @RequestMapping("/checkContent")
-    public String checkContent(
+    public ToutiaoAPI2.tags$text$antidirt_response checkContent(
             @RequestParam String access_token,
             @RequestParam String content
     ) throws Exception {
@@ -104,17 +104,17 @@ public class Demo {
         task.setContent(content);
         //
         ToutiaoAPI2.tags$text$antidirt_body body = new ToutiaoAPI2.tags$text$antidirt_body();
-        body.setTasks(new ArrayList<ToutiaoAPI2.tags$text$antidirt_body.Task>(){{add(task}});
-        return Base64.encodeBase64String(new ToutiaoSDK2().tags$text$antidirt(body));
+        body.setTasks(new ArrayList<ToutiaoAPI2.tags$text$antidirt_body.Task>(){{add(task);}});
+        return new ToutiaoSDK2().tags$text$antidirt(access_token,body);
     }
-    @RequestMapping("/checkContent")
-    public String checkImage(
+    @RequestMapping("/checkImage")
+    public ToutiaoAPI2.tags$image_response checkImage(
             @RequestParam String access_token
     ) throws Exception {
         ToutiaoAPI2.tags$image_body.Task task = new ToutiaoAPI2.tags$image_body.Task();
         task.setImage("https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png");
         ToutiaoAPI2.tags$image_body body = new ToutiaoAPI2.tags$image_body();
-        body.set
-        return Base64.encodeBase64String(new ToutiaoSDK().apps$qrcode(body));
+        body.setTasks(new ArrayList<ToutiaoAPI2.tags$image_body.Task>(){{add(task);}});
+        return new ToutiaoSDK2().tags$image(access_token,body);
     }
 }
