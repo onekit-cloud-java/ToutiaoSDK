@@ -113,6 +113,7 @@ public class Demo {
     ) throws Exception {
         ToutiaoAPI2.tags$image_body.Task task = new ToutiaoAPI2.tags$image_body.Task();
         task.setImage("https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png");
+        //
         ToutiaoAPI2.tags$image_body body = new ToutiaoAPI2.tags$image_body();
         body.setTasks(new ArrayList<ToutiaoAPI2.tags$image_body.Task>(){{add(task);}});
         return new ToutiaoSDK2().tags$image(access_token,body);
