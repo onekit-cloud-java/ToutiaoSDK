@@ -6,7 +6,7 @@
 
     <groupId>cn.onekit.x2x.cloud</groupId>
     <artifactId>toutiao-sdk</artifactId>
-    <version>3.0.0</version>
+    <version>3.4.0</version>
     <name>ToutiaoSDK</name>
     <url>https://github.com/onekit-cloud-java/toutiaosdk</url>
     <description>toutiao cloud sdk</description>
@@ -19,14 +19,17 @@
     <dependency>
         <groupId>cn.onekit.x2x.cloud</groupId>
         <artifactId>thekit</artifactId>
-        <version>1.2.0</version>
+        <version>1.5.2</version>
     </dependency>
     <dependency>
         <groupId>cn.onekit.x2x.cloud</groupId>
         <artifactId>toutiao</artifactId>
-        <version>3.0.0</version>
+        <version>3.4.0</version>
     </dependency>
 </dependencies>
+    <!--
+    mvn clean deploy -P release
+    -->
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>

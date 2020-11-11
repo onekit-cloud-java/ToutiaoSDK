@@ -1,8 +1,5 @@
 package com.toutiao.developer.sdk;
-import cn.onekit.thekit.AJAX;
-import cn.onekit.thekit.Crypto;
-import cn.onekit.thekit.JSON;
-import cn.onekit.thekit.STRING;
+import cn.onekit.thekit.*;
 import com.google.gson.JsonObject;
 import com.toutiao.developer.ToutiaoAPI;
 import com.toutiao.developer.entity.*;
@@ -10,20 +7,22 @@ import org.apache.commons.codec.binary.Base64;
 import java.util.HashMap;
 
 public class ToutiaoSDK implements ToutiaoAPI {
-    
-    public String _crypto(String sig_method, String session_key, String data) throws Exception {
-        Crypto.Method method;
+
+    public String _sign(String sig_method, String session_key, String data) throws Exception
+    {
+        SIGN.Method method;
         switch (sig_method) {
             case "hmac_sha256":
-                method = Crypto.Method.HMACSHA256;
+                method = SIGN.Method.HMACSHA256;
                 break;
             default:
                 throw new Exception(sig_method);
         }
-        return new Crypto(method).encode(session_key, data);
+        return new SIGN(method).sign(session_key, data);
     }
-
-    
+    public String _sign( String rawData,String session_key) throws Exception{
+        return new SIGN(SIGN.Method.SHA1).sign(rawData+session_key);
+    }
     public apps__token_response apps__token(String appid, String secret, String grant_type) throws ToutiaoError {
         final JsonObject result;
         try {

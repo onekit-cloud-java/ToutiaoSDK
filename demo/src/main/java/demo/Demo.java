@@ -1,11 +1,14 @@
 package demo;
 
+import cn.onekit.thekit.CRYPTO;
 import cn.onekit.thekit.JSON;
+import cn.onekit.thekit.SIGN;
 import com.toutiao.developer.entity.*;
 import com.toutiao.developer.entity.v2.*;
 import com.toutiao.developer.sdk.ToutiaoSDK;
 import com.toutiao.developer.sdk.ToutiaoSDK2;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.tomcat.jni.Error;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +20,19 @@ import java.util.ArrayList;
 
 public class Demo {
     final String sig_method = "hmac_sha256";
-
+    @RequestMapping("/decrypt")
+    public String decrypt(
+            @RequestParam String session_key,
+            @RequestParam String iv,
+            @RequestParam String encryptedData,
+            @RequestParam String rawData,
+            @RequestParam String signature
+    ) throws Exception {
+        if(!new ToutiaoSDK()._sign(rawData,session_key).equals(signature)){
+           throw new Exception("bad sign!!");
+        }
+        return new CRYPTO(CRYPTO.Key.AES, CRYPTO.Mode.PKCS5,128).decrypt(encryptedData,iv,session_key);
+    }
     @RequestMapping("/getAccessToken")
     public apps__token_response getAccessToken() throws Exception {
         return new ToutiaoSDK().apps__token(ToutiaoAccount.appid, ToutiaoAccount.secret, "client_credential");
@@ -49,7 +64,7 @@ public class Demo {
             add(new KV("key1", "value1"));
         }});
 
-        String signature = ToutiaoSDK._crypto(sig_method, session_key, JSON.object2json(body).toString());
+        String signature = ToutiaoSDK._sign(sig_method, session_key, JSON.object2json(body).toString());
         return ToutiaoSDK.apps__set_user_storage(
                 access_token,
                 openid,
@@ -69,7 +84,7 @@ public class Demo {
         body.setKey(new ArrayList<String>() {{
             add("key1");
         }});
-        String signature = ToutiaoSDK._crypto(sig_method, session_key, JSON.object2json(body).toString());
+        String signature = ToutiaoSDK._sign(sig_method, session_key, JSON.object2json(body).toString());
         return ToutiaoSDK.apps__remove_user_storage(
                 access_token,
                 openid,
