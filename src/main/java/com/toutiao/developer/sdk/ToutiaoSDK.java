@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class ToutiaoSDK implements ToutiaoAPI {
 
-    public String _sign(String sig_method, String session_key, String data) throws Exception
+    public String _signBody(String sig_method, String session_key, String data) throws Exception
     {
         SIGN.Method method;
         switch (sig_method) {
@@ -20,7 +20,7 @@ public class ToutiaoSDK implements ToutiaoAPI {
         }
         return new SIGN(method).sign(session_key, data);
     }
-    public String _sign( String rawData,String session_key) throws Exception{
+    public String _signRaw( String rawData,String session_key) throws Exception{
         return new SIGN(SIGN.Method.SHA1).sign(rawData+session_key);
     }
     public apps__token_response apps__token(String appid, String secret, String grant_type) throws ToutiaoError {
