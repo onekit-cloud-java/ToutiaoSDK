@@ -4,6 +4,8 @@ import com.google.gson.JsonObject;
 import com.toutiao.developer.ToutiaoAPI;
 import com.toutiao.developer.entity.*;
 import org.apache.commons.codec.binary.Base64;
+
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
 public class ToutiaoSDK implements ToutiaoAPI {
@@ -22,6 +24,9 @@ public class ToutiaoSDK implements ToutiaoAPI {
     }
     public String _signRaw( String rawData,String session_key) throws Exception{
         return new SIGN(SIGN.Method.SHA1).sign(rawData+session_key);
+    }
+    public String _decrypt(String encryptedData,String iv,String session_key) throws Exception {
+        return new CRYPTO(CRYPTO.Key.AES, CRYPTO.Mode.PKCS5,128).decrypt(encryptedData,iv,session_key);
     }
     public apps__token_response apps__token(String appid, String secret, String grant_type) throws ToutiaoError {
         final JsonObject result;

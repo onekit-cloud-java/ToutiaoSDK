@@ -28,10 +28,10 @@ public class Demo {
             @RequestParam String rawData,
             @RequestParam String signature
     ) throws Exception {
-        if(!new ToutiaoSDK()._sign(rawData,session_key).equals(signature)){
+        if(!new ToutiaoSDK()._signRaw(rawData,session_key).equals(signature)){
            throw new Exception("bad sign!!");
         }
-        return new CRYPTO(CRYPTO.Key.AES, CRYPTO.Mode.PKCS5,128).decrypt(encryptedData,iv,session_key);
+        return new ToutiaoSDK()._decrypt(encryptedData,iv,session_key);
     }
     @RequestMapping("/getAccessToken")
     public apps__token_response getAccessToken() throws Exception {
@@ -64,7 +64,7 @@ public class Demo {
             add(new KV("key1", "value1"));
         }});
 
-        String signature = ToutiaoSDK._sign(sig_method, session_key, JSON.object2json(body).toString());
+        String signature = ToutiaoSDK._signBody(sig_method, session_key, JSON.object2json(body).toString());
         return ToutiaoSDK.apps__set_user_storage(
                 access_token,
                 openid,
@@ -84,7 +84,7 @@ public class Demo {
         body.setKey(new ArrayList<String>() {{
             add("key1");
         }});
-        String signature = ToutiaoSDK._sign(sig_method, session_key, JSON.object2json(body).toString());
+        String signature = ToutiaoSDK._signBody(sig_method, session_key, JSON.object2json(body).toString());
         return ToutiaoSDK.apps__remove_user_storage(
                 access_token,
                 openid,
