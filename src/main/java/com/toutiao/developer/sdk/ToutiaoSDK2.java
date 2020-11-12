@@ -10,7 +10,10 @@ import java.util.HashMap;
 
 public class ToutiaoSDK2 implements ToutiaoAPI2 {
 
-    
+    private final String host;
+    public ToutiaoSDK2(String host){
+        this.host=host;
+    }
     public tags__text__antidirt_response tags__text__antidirt(String X_Token, tags__text__antidirt_body body) throws ToutiaoError {
         final JsonObject result;
         try {
@@ -18,7 +21,8 @@ public class ToutiaoSDK2 implements ToutiaoAPI2 {
                 put("X-Token", X_Token);
             }};
             JsonObject post_body = (JsonObject) JSON.object2json(body);
-            result = (JsonObject) JSON.parse(AJAX.request("https://developer.toutiao.com/api/v2/tags/text/antidirt", "post", post_body.toString()));
+            String url = String.format("%s/api/v2/tags/text/antidirt",host);
+            result = (JsonObject) JSON.parse(AJAX.request(url, "post", post_body.toString()));
         } catch (Exception e) {
             ToutiaoError errCode = new ToutiaoError();
             throw errCode;
@@ -37,7 +41,8 @@ public class ToutiaoSDK2 implements ToutiaoAPI2 {
                 put("X-Token", X_Token);
             }};
             JsonObject post_body = (JsonObject) JSON.object2json(body);
-            result = (JsonObject) JSON.parse(AJAX.request("https://developer.toutiao.com/api/v2/tags/image/", "post", post_body.toString()));
+            String url = String.format("%s/api/v2/tags/image/",host);
+            result = (JsonObject) JSON.parse(AJAX.request(url, "post", post_body.toString()));
         } catch (Exception e) {
             ToutiaoError errCode = new ToutiaoError();
             throw errCode;

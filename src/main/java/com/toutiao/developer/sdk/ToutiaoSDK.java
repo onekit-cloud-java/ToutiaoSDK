@@ -1,15 +1,19 @@
 package com.toutiao.developer.sdk;
+
 import cn.onekit.thekit.*;
 import com.google.gson.JsonObject;
 import com.toutiao.developer.ToutiaoAPI;
 import com.toutiao.developer.entity.*;
 import org.apache.commons.codec.binary.Base64;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
 public class ToutiaoSDK implements ToutiaoAPI {
 
+    private final String host;
+    public ToutiaoSDK(String host){
+        this.host=host;
+    }
     public String _signBody(String sig_method, String session_key, String data) throws Exception
     {
         SIGN.Method method;
@@ -31,7 +35,7 @@ public class ToutiaoSDK implements ToutiaoAPI {
     public apps__token_response apps__token(String appid, String secret, String grant_type) throws ToutiaoError {
         final JsonObject result;
         try {
-            String url = "https://developer.toutiao.com/api/apps/token";
+            String url = String.format("%s/api/apps/token",host);
             result = (JsonObject) JSON.parse(AJAX.request(url, "get", new HashMap<String, String>() {{
                 put("appid", appid);
                 put("secret", secret);
@@ -51,7 +55,7 @@ public class ToutiaoSDK implements ToutiaoAPI {
     public apps__jscode2session_response apps__jscode2session(String appid, String secret, String code, String anonymous_code) throws ToutiaoError {
         final JsonObject result;
         try {
-            String url = "https://developer.toutiao.com/api/apps/jscode2session";
+            String url = String.format("%s/api/apps/jscode2session",host);
             HashMap<String, String> request = new HashMap<String, String>() {{
                 put("appid", appid);
                 put("secret", secret);
@@ -77,7 +81,8 @@ public class ToutiaoSDK implements ToutiaoAPI {
     public apps__set_user_storage_response apps__set_user_storage(String access_token, String openid, String signature, String sig_method, apps__set_user_storage_body body) throws ToutiaoError {
         final JsonObject result;
         try {
-            String url = String.format("https://developer.toutiao.com/api/apps/set_user_storage?access_token=%s&openid=%s&sig_method=%s&signature=%s",
+            String url = String.format("%s/api/apps/set_user_storage?access_token=%s&openid=%s&sig_method=%s&signature=%s",
+                    host,
                     access_token,
                     openid,
                     sig_method,
@@ -99,7 +104,8 @@ public class ToutiaoSDK implements ToutiaoAPI {
     public apps__remove_user_storage_response apps__remove_user_storage(String access_token, String openid, String signature, String sig_method, apps__remove_user_storage_body body) throws ToutiaoError {
         final JsonObject result;
         try {
-            String url = String.format("https://developer.toutiao.com/api/apps/remove_user_storage?access_token=%s&openid=%s&sig_method=%s&signature=%s",
+            String url = String.format("%s/api/apps/remove_user_storage?access_token=%s&openid=%s&sig_method=%s&signature=%s",
+                    host,
                     access_token,
                     openid,
                     sig_method,
@@ -120,7 +126,7 @@ public class ToutiaoSDK implements ToutiaoAPI {
     public byte[] apps__qrcode(apps__qrcode_body request) throws ToutiaoError {
         final byte[] bytes;
         try {
-            String url = "https://developer.toutiao.com/api/apps/qrcode";
+            String url = String.format("%s/api/apps/qrcode",host);
             JsonObject post_body = (JsonObject) JSON.object2json(request);
             bytes = AJAX.download(url, "post", post_body.toString());
         } catch (Exception e) {
@@ -142,7 +148,7 @@ public class ToutiaoSDK implements ToutiaoAPI {
     public apps__game__template__send_response apps__game__template__send(apps__game__template__send_body request) throws ToutiaoError {
         final JsonObject result;
         try {
-            String url = "https://developer.toutiao.com/api/apps/game/template/send";
+            String url = String.format("%s/api/apps/game/template/send",host);
             JsonObject post_body = (JsonObject) JSON.object2json(request);
             result = (JsonObject) JSON.parse(AJAX.request(url, "post", post_body.toString()));
         } catch (Exception e) {
@@ -159,7 +165,7 @@ public class ToutiaoSDK implements ToutiaoAPI {
     public apps__subscribe_notification__developer__notify_response apps__subscribe_notification__developer__notify(apps__subscribe_notification__developer__notify_body request) throws ToutiaoError {
         final JsonObject result;
         try {
-            String url = "https://developer.toutiao.com/api/apps/game/template/send";
+            String url = String.format("%s/api/apps/game/template/send",host);
             JsonObject post_body = (JsonObject) JSON.object2json(request);
             result = (JsonObject) JSON.parse(AJAX.request(url, "post", post_body.toString()));
         } catch (Exception e) {

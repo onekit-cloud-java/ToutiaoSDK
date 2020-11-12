@@ -21,8 +21,8 @@ import java.util.ArrayList;
 
 public class Demo {
     final String sig_method = "hmac_sha256";
-     ToutiaoSDK sdk = new ToutiaoSDK("https://developer.toutiao.com");
-    ToutiaoSDK2 sdk2 = new ToutiaoSDK2("https://developer.toutiao.com");
+     ToutiaoSDK sdk = new ToutiaoSDK("http://localhost/toutiao");
+    ToutiaoSDK2 sdk2 = new ToutiaoSDK2("http://localhost/toutiao");
     @RequestMapping("/decrypt")
     public String decrypt(
             @RequestParam String session_key,
