@@ -1,4 +1,4 @@
-package com.toutiao.developer.sdk;
+package com.toutiao.developer;
 
 import cn.onekit.thekit.JSON;
 import com.toutiao.developer.ToutiaoAPI2;

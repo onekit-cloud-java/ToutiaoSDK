@@ -1,10 +1,13 @@
-package com.toutiao.developer.sdk;
+package com.toutiao.developer;
 
-import cn.onekit.thekit.*;
+import cn.onekit.thekit.AJAX;
+import cn.onekit.thekit.CRYPTO;
+import cn.onekit.thekit.JSON;
+import cn.onekit.thekit.STRING;
 import com.google.gson.JsonObject;
-import com.toutiao.developer.ToutiaoAPI;
 import com.toutiao.developer.entity.*;
 import org.apache.commons.codec.binary.Base64;
+
 import java.util.HashMap;
 
 public class ToutiaoSDK implements ToutiaoAPI {
