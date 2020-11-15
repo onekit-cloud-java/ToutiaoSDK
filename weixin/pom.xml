@@ -22,7 +22,7 @@
         <dependency>
             <groupId>cn.onekit.x2x.cloud</groupId>
             <artifactId>toutiao-sdk</artifactId>
-            <version>4.1.0</version>
+            <version>4.1.1</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

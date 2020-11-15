@@ -14,13 +14,13 @@ public class ToutiaoSDK2 implements ToutiaoAPI2 {
     public ToutiaoSDK2(String host){
         this.host=host;
     }
-    public tags__text__antidirt_response tags__text__antidirt(String X_Token, tags__text__antidirt_body body) throws ToutiaoError {
+    public tags__text__antidirt_response tags__text__antidirt(String tt_X_Token, tags__text__antidirt_body tt_body) throws ToutiaoError {
         final JsonObject result;
         try {
             AJAX.headers = new HashMap<String, String>() {{
-                put("X-Token", X_Token);
+                put("X-Token", tt_X_Token);
             }};
-            JsonObject post_body = (JsonObject) JSON.object2json(body);
+            JsonObject post_body = (JsonObject) JSON.object2json(tt_body);
             String url = String.format("%s/api/v2/tags/text/antidirt",host);
             result = (JsonObject) JSON.parse(AJAX.request(url, "post", post_body.toString()));
         } catch (Exception e) {
@@ -34,13 +34,13 @@ public class ToutiaoSDK2 implements ToutiaoAPI2 {
     }
 
     
-    public tags__image_response tags__image(String X_Token, tags__image_body body) throws ToutiaoError {
+    public tags__image_response tags__image(String tt_X_Token, tags__image_body tt_body) throws ToutiaoError {
         final JsonObject result;
         try {
             AJAX.headers = new HashMap<String, String>() {{
-                put("X-Token", X_Token);
+                put("X-Token", tt_X_Token);
             }};
-            JsonObject post_body = (JsonObject) JSON.object2json(body);
+            JsonObject post_body = (JsonObject) JSON.object2json(tt_body);
             String url = String.format("%s/api/v2/tags/image/",host);
             result = (JsonObject) JSON.parse(AJAX.request(url, "post", post_body.toString()));
         } catch (Exception e) {
