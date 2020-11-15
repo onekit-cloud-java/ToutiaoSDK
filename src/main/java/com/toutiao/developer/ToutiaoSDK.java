@@ -25,9 +25,9 @@ public class ToutiaoSDK implements ToutiaoAPI {
         try {
             String url = String.format("%s/api/apps/token",host);
             result = (JsonObject) JSON.parse(AJAX.request(url, "get", new HashMap<String, String>() {{
-                put("tt_appid", tt_appid);
-                put("tt_secret", tt_secret);
-                put("tt_grant_type", tt_grant_type);
+                put("appid", tt_appid);
+                put("secret", tt_secret);
+                put("grant_type", tt_grant_type);
             }}));
         } catch (Exception e) {
             ToutiaoError errCode = new ToutiaoError();
@@ -45,13 +45,13 @@ public class ToutiaoSDK implements ToutiaoAPI {
         try {
             String url = String.format("%s/api/apps/jscode2session",host);
             HashMap<String, String> tt_body = new HashMap<String, String>() {{
-                put("tt_appid", tt_appid);
-                put("tt_secret", tt_secret);
+                put("appid", tt_appid);
+                put("secret", tt_secret);
                 if (!STRING.isEmpty(tt_code)) {
-                    put("tt_code", tt_code);
+                    put("code", tt_code);
                 }
                 if (!STRING.isEmpty(tt_anonymous_code)) {
-                    put("tt_anonymous_code", tt_anonymous_code);
+                    put("anonymous_code", tt_anonymous_code);
                 }
             }};
             result = (JsonObject) JSON.parse(AJAX.request(url, "get", tt_body));
@@ -69,7 +69,7 @@ public class ToutiaoSDK implements ToutiaoAPI {
     public apps__set_user_storage_response apps__set_user_storage(String tt_access_token, String tt_openid, String tt_signature, String tt_sig_method, apps__set_user_storage_body tt_body) throws ToutiaoError {
         final JsonObject result;
         try {
-            String url = String.format("%s/api/apps/set_user_storage?tt_access_token=%s&tt_openid=%s&tt_sig_method=%s&tt_signature=%s",
+            String url = String.format("%s/api/apps/set_user_storage?access_token=%s&openid=%s&sig_method=%s&signature=%s",
                     host,
                     tt_access_token,
                     tt_openid,
@@ -92,7 +92,7 @@ public class ToutiaoSDK implements ToutiaoAPI {
     public apps__remove_user_storage_response apps__remove_user_storage(String tt_access_token, String tt_openid, String tt_signature, String tt_sig_method, apps__remove_user_storage_body tt_body) throws ToutiaoError {
         final JsonObject result;
         try {
-            String url = String.format("%s/api/apps/remove_user_storage?tt_access_token=%s&tt_openid=%s&tt_sig_method=%s&tt_signature=%s",
+            String url = String.format("%s/api/apps/remove_user_storage?access_token=%s&openid=%s&sig_method=%s&signature=%s",
                     host,
                     tt_access_token,
                     tt_openid,
