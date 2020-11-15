@@ -7,9 +7,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ToutiaoSDK" />
-        <module name="demo" />
-        <module name="weixin" />
         <module name="toutiao-sdk" />
+        <module name="weixin" />
+        <module name="demo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
