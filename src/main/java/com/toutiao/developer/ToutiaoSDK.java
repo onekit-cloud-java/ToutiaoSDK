@@ -57,6 +57,8 @@ public class ToutiaoSDK implements ToutiaoAPI {
             result = (JsonObject) JSON.parse(AJAX.request(url, "get", tt_body));
         } catch (Exception e) {
             ToutiaoError errCode = new ToutiaoError();
+            errCode.setErrcode(9527);
+            errCode.setErrmsg(e.getMessage());
             throw errCode;
         }
         if (result.has("error") && result.get("error").getAsInt() != 0) {

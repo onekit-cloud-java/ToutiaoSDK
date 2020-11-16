@@ -17,7 +17,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("/toutiao_demo")
+@RequestMapping("/")
 
 public class Demo {
     final String sig_method = "hmac_sha256";
