@@ -2,10 +2,7 @@ package demo;
 
 import cn.onekit.thekit.JSON;
 import com.toutiao.developer.entity.*;
-import com.toutiao.developer.entity.v2.tags__image_body;
-import com.toutiao.developer.entity.v2.tags__image_response;
-import com.toutiao.developer.entity.v2.tags__text__antidirt_body;
-import com.toutiao.developer.entity.v2.tags__text__antidirt_response;
+import com.toutiao.developer.entity.v2.*;
 import com.toutiao.developer.ToutiaoSDK;
 import com.toutiao.developer.ToutiaoSDK2;
 import org.apache.commons.codec.binary.Base64;
@@ -21,8 +18,9 @@ import java.util.ArrayList;
 
 public class Demo {
     final String sig_method = "hmac_sha256";
-     ToutiaoSDK sdk = new ToutiaoSDK("http://localhost/toutiao");
+    ToutiaoSDK sdk = new ToutiaoSDK("http://localhost/toutiao");
     ToutiaoSDK2 sdk2 = new ToutiaoSDK2("http://localhost/toutiao");
+
     @RequestMapping("/decrypt")
     public String decrypt(
             @RequestParam String session_key,
@@ -31,27 +29,42 @@ public class Demo {
             @RequestParam String rawData,
             @RequestParam String signature
     ) throws Exception {
-        if(!sdk._signRaw(rawData,session_key).equals(signature)){
-           throw new Exception("bad sign!!");
+        if (!sdk._signRaw(rawData, session_key).equals(signature)) {
+            throw new Exception("bad sign!!");
         }
-        return sdk._decrypt(encryptedData,iv,session_key);
+        return sdk._decrypt(encryptedData, iv, session_key);
     }
+
     @RequestMapping("/getAccessToken")
     public apps__token_response getAccessToken() throws Exception {
-        return sdk.apps__token(ToutiaoAccount.appid, ToutiaoAccount.secret, "client_credential");
+        try {
+            return sdk.apps__token(ToutiaoAccount.appid, ToutiaoAccount.secret, "client_credential");
+        } catch (ToutiaoError e) {
+            System.out.println(JSON.object2json(e));
+            return null;
+        }
     }
 
     @RequestMapping("/code2Session1")
     public apps__jscode2session_response code2Session1(
             @RequestParam String code) throws Exception {
-        return sdk.apps__jscode2session(ToutiaoAccount.appid, ToutiaoAccount.secret, code, null);
-
+        try {
+            return sdk.apps__jscode2session(ToutiaoAccount.appid, ToutiaoAccount.secret, code, null);
+        } catch (ToutiaoError e) {
+            System.out.println(JSON.object2json(e));
+            return null;
+        }
     }
 
     @RequestMapping("/code2Session2")
     public apps__jscode2session_response code2Session2(
             @RequestParam String anonymous_code) throws Exception {
-        return sdk.apps__jscode2session(ToutiaoAccount.appid, ToutiaoAccount.secret, null, anonymous_code);
+        try {
+            return sdk.apps__jscode2session(ToutiaoAccount.appid, ToutiaoAccount.secret, null, anonymous_code);
+        } catch (ToutiaoError e) {
+            System.out.println(JSON.object2json(e));
+            return null;
+        }
     }
 
 
@@ -67,12 +80,17 @@ public class Demo {
         }});
 
         String signature = sdk._signBody(sig_method, session_key, JSON.object2json(body).toString());
-        return sdk.apps__set_user_storage(
-                access_token,
-                openid,
-                signature,
-                sig_method,
-                body);
+        try {
+            return sdk.apps__set_user_storage(
+                    access_token,
+                    openid,
+                    signature,
+                    sig_method,
+                    body);
+        } catch (ToutiaoError e) {
+            System.out.println(JSON.object2json(e));
+            return null;
+        }
     }
 
     @RequestMapping("/removeUserStorage")
@@ -86,12 +104,17 @@ public class Demo {
             add("key1");
         }});
         String signature = sdk._signBody(sig_method, session_key, JSON.object2json(body).toString());
-        return sdk.apps__remove_user_storage(
-                access_token,
-                openid,
-                signature,
-                sig_method,
-                body);
+        try {
+            return sdk.apps__remove_user_storage(
+                    access_token,
+                    openid,
+                    signature,
+                    sig_method,
+                    body);
+        } catch (ToutiaoError e) {
+            System.out.println(JSON.object2json(e));
+            return null;
+        }
     }
 
     @RequestMapping("/createQRCode")
@@ -106,7 +129,12 @@ public class Demo {
         body.setLine_color(new RGB(255, 0, 0));
         body.setBackground(new RGB(0, 255, 0));
         body.setSet_icon(true);
-        return Base64.encodeBase64String(sdk.apps__qrcode(body));
+        try {
+            return Base64.encodeBase64String(sdk.apps__qrcode(body));
+        } catch (ToutiaoError e) {
+            System.out.println(JSON.object2json(e));
+            return null;
+        }
     }
 
     @RequestMapping("/checkContent")
@@ -114,13 +142,21 @@ public class Demo {
             @RequestParam String access_token,
             @RequestParam String content
     ) throws Exception {
-        tags__text__antidirt_body.Task task=new tags__text__antidirt_body.Task();
+        tags__text__antidirt_body.Task task = new tags__text__antidirt_body.Task();
         task.setContent(content);
         //
         tags__text__antidirt_body body = new tags__text__antidirt_body();
-        body.setTasks(new ArrayList<tags__text__antidirt_body.Task>(){{add(task);}});
-        return sdk2.tags__text__antidirt(access_token,body);
+        body.setTasks(new ArrayList<tags__text__antidirt_body.Task>() {{
+            add(task);
+        }});
+        try {
+            return sdk2.tags__text__antidirt(access_token, body);
+        } catch (ToutiaoError2 e) {
+            System.out.println(JSON.object2json(e));
+            return null;
+        }
     }
+
     @RequestMapping("/checkImage")
     public tags__image_response checkImage(
             @RequestParam String access_token
@@ -129,7 +165,14 @@ public class Demo {
         task.setImage("https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png");
         //
         tags__image_body body = new tags__image_body();
-        body.setTasks(new ArrayList<tags__image_body.Task>(){{add(task);}});
-        return sdk2.tags__image(access_token,body);
+        body.setTasks(new ArrayList<tags__image_body.Task>() {{
+            add(task);
+        }});
+        try {
+            return sdk2.tags__image(access_token, body);
+        } catch (ToutiaoError2 e) {
+            System.out.println(JSON.object2json(e));
+            return null;
+        }
     }
 }

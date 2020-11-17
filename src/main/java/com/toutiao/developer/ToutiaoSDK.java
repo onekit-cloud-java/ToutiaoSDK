@@ -31,6 +31,8 @@ public class ToutiaoSDK implements ToutiaoAPI {
             }}));
         } catch (Exception e) {
             ToutiaoError errCode = new ToutiaoError();
+            errCode.setError(9527);
+            errCode.setErrcode(9527);
             throw errCode;
         }
         if (result.has("error")) {
@@ -57,6 +59,7 @@ public class ToutiaoSDK implements ToutiaoAPI {
             result = (JsonObject) JSON.parse(AJAX.request(url, "get", tt_body));
         } catch (Exception e) {
             ToutiaoError errCode = new ToutiaoError();
+            errCode.setError(9527);
             errCode.setErrcode(9527);
             errCode.setErrmsg(e.getMessage());
             throw errCode;
@@ -82,6 +85,9 @@ public class ToutiaoSDK implements ToutiaoAPI {
             result = (JsonObject) JSON.parse(AJAX.request(url, "post", post_body.toString()));
         } catch (Exception e) {
             ToutiaoError errCode = new ToutiaoError();
+            errCode.setError(9527);
+            errCode.setErrcode(9527);
+            errCode.setErrmsg(e.getMessage());
             throw errCode;
         }
         if (result.has("error") && result.get("error").getAsInt() != 0) {
@@ -104,6 +110,9 @@ public class ToutiaoSDK implements ToutiaoAPI {
             result = (JsonObject) JSON.parse(AJAX.request(url, "post", post_body.toString()));
         } catch (Exception e) {
             ToutiaoError errCode = new ToutiaoError();
+            errCode.setError(9527);
+            errCode.setErrcode(9527);
+            errCode.setErrmsg(e.getMessage());
             throw errCode;
         }
         if (result.has("error") && result.get("error").getAsInt() != 0) {
@@ -121,6 +130,9 @@ public class ToutiaoSDK implements ToutiaoAPI {
             bytes = AJAX.download(url, "post", post_body.toString());
         } catch (Exception e) {
             ToutiaoError errCode = new ToutiaoError();
+            errCode.setError(9527);
+            errCode.setErrcode(9527);
+            errCode.setErrmsg(e.getMessage());
             throw errCode;
         }
         try {
@@ -129,7 +141,11 @@ public class ToutiaoSDK implements ToutiaoAPI {
                 throw JSON.json2object(result, ToutiaoError.class);
             }
         } catch (Exception e) {
-
+            ToutiaoError errCode = new ToutiaoError();
+            errCode.setError(9527);
+            errCode.setErrcode(9527);
+            errCode.setErrmsg(e.getMessage());
+            throw errCode;
         }
         return bytes;
     }
@@ -143,6 +159,9 @@ public class ToutiaoSDK implements ToutiaoAPI {
             result = (JsonObject) JSON.parse(AJAX.request(url, "post", post_body.toString()));
         } catch (Exception e) {
             ToutiaoError errCode = new ToutiaoError();
+            errCode.setError(9527);
+            errCode.setErrcode(9527);
+            errCode.setErrmsg(e.getMessage());
             throw errCode;
         }
         if (result.has("error") && result.get("error").getAsInt() != 0) {
@@ -160,6 +179,9 @@ public class ToutiaoSDK implements ToutiaoAPI {
             result = (JsonObject) JSON.parse(AJAX.request(url, "post", post_body.toString()));
         } catch (Exception e) {
             ToutiaoError errCode = new ToutiaoError();
+            errCode.setError(9527);
+            errCode.setErrcode(9527);
+            errCode.setErrmsg(e.getMessage());
             throw errCode;
         }
         if (result.has("error") && result.get("error").getAsInt() != 0) {
