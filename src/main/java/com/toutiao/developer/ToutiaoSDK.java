@@ -141,11 +141,7 @@ public class ToutiaoSDK implements ToutiaoAPI {
                 throw JSON.json2object(result, ToutiaoError.class);
             }
         } catch (Exception e) {
-            ToutiaoError errCode = new ToutiaoError();
-            errCode.setError(9527);
-            errCode.setErrcode(9527);
-            errCode.setErrmsg(e.getMessage());
-            throw errCode;
+
         }
         return bytes;
     }
