@@ -1,6 +1,7 @@
 package demo;
 
 import cn.onekit.thekit.JSON;
+import com.google.gson.JsonObject;
 import com.toutiao.developer.entity.*;
 import com.toutiao.developer.entity.v2.*;
 import com.toutiao.developer.ToutiaoSDK;
@@ -18,8 +19,8 @@ import java.util.ArrayList;
 
 public class Demo {
     final String sig_method = "hmac_sha256";
-    ToutiaoSDK sdk = new ToutiaoSDK("http://localhost/toutiao");
-    ToutiaoSDK2 sdk2 = new ToutiaoSDK2("http://localhost/toutiao");
+    ToutiaoSDK sdk = new ToutiaoSDK("http://localhost:10041");
+    ToutiaoSDK2 sdk2 = new ToutiaoSDK2("http://localhost:10041");
 
     @RequestMapping("/decrypt")
     public String decrypt(
@@ -75,6 +76,7 @@ public class Demo {
             @RequestParam String openid
     ) throws Exception {
         apps__set_user_storage_body body = new apps__set_user_storage_body();
+
         body.setTt_kv_list(new ArrayList<KV>() {{
             add(new KV("key1", "value1"));
         }});
@@ -193,4 +195,5 @@ public class Demo {
             return null;
         }
     }
+
 }
