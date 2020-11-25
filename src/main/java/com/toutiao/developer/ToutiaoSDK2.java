@@ -24,6 +24,8 @@ public class ToutiaoSDK2 implements ToutiaoAPI2 {
             result = (JsonObject) JSON.parse(AJAX.request(url, "post", post_body.toString()));
         } catch (Exception e) {
             ToutiaoError2 errCode = new ToutiaoError2();
+            errCode.setCode(9527);
+            errCode.setMessage(e.getMessage());
             throw errCode;
         }
         if (result.has("error") && result.get("error").getAsInt() != 0) {
