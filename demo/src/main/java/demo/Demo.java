@@ -82,60 +82,60 @@ public class Demo {
     }
 
 
-    @RequestMapping("/setUserStorage")
-    public String setUserStorage(
-            @RequestParam String session_key,
-            @RequestParam String access_token,
-            @RequestParam String openid
-    )  {
-        try {
-            apps__set_user_storage_body body = new apps__set_user_storage_body();
-            body.setTt_kv_list(new ArrayList<KV>() {{
-                add(new KV("key1", "value1"));
-            }});
-
-            String signature = sdk._signBody(sig_method, session_key, JSON.object2json(body).toString());
-            return JSON.object2string(sdk.apps__set_user_storage(
-                    access_token,
-                    openid,
-                    signature,
-                    sig_method,
-                    body));
-        } catch (ToutiaoError e) {
-            System.out.println(JSON.object2json(e));
-            return null;
-        }catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    @RequestMapping("/removeUserStorage")
-    public String removeUserStorage(
-            @RequestParam String session_key,
-            @RequestParam String access_token,
-            @RequestParam String openid
-    )  {
-        try {
-            apps__remove_user_storage_body body = new apps__remove_user_storage_body();
-            body.setKey(new ArrayList<String>() {{
-                add("key1");
-            }});
-            String signature = sdk._signBody(sig_method, session_key, JSON.object2json(body).toString());
-            return JSON.object2string(sdk.apps__remove_user_storage(
-                    access_token,
-                    openid,
-                    signature,
-                    sig_method,
-                    body));
-        } catch (ToutiaoError e) {
-            System.out.println(JSON.object2json(e));
-            return null;
-        }catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
-    }
+//    @RequestMapping("/setUserStorage")
+//    public String setUserStorage(
+//            @RequestParam String session_key,
+//            @RequestParam String access_token,
+//            @RequestParam String openid
+//    )  {
+//        try {
+//            apps__set_user_storage_body body = new apps__set_user_storage_body();
+//            body.setTt_kv_list(new ArrayList<KV>() {{
+//                add(new KV("key1", "value1"));
+//            }});
+//
+//            String signature = sdk._signBody(sig_method, session_key, JSON.object2json(body).toString());
+//            return JSON.object2string(sdk.apps__set_user_storage(
+//                    access_token,
+//                    openid,
+//                    signature,
+//                    sig_method,
+//                    body));
+//        } catch (ToutiaoError e) {
+//            System.out.println(JSON.object2json(e));
+//            return null;
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
+//
+//    @RequestMapping("/removeUserStorage")
+//    public String removeUserStorage(
+//            @RequestParam String session_key,
+//            @RequestParam String access_token,
+//            @RequestParam String openid
+//    )  {
+//        try {
+//            apps__remove_user_storage_body body = new apps__remove_user_storage_body();
+//            body.setKey(new ArrayList<String>() {{
+//                add("key1");
+//            }});
+//            String signature = sdk._signBody(sig_method, session_key, JSON.object2json(body).toString());
+//            return JSON.object2string(sdk.apps__remove_user_storage(
+//                    access_token,
+//                    openid,
+//                    signature,
+//                    sig_method,
+//                    body));
+//        } catch (ToutiaoError e) {
+//            System.out.println(JSON.object2json(e));
+//            return null;
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
 
     @RequestMapping("/createQRCode")
     public String createQRCode(

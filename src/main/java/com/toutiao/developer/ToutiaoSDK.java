@@ -70,56 +70,56 @@ public class ToutiaoSDK implements ToutiaoAPI {
         return JSON.json2object(result, apps__jscode2session_response.class);
     }
 
-    
-    public apps__set_user_storage_response apps__set_user_storage(String tt_access_token, String tt_openid, String tt_signature, String tt_sig_method, apps__set_user_storage_body tt_body) throws ToutiaoError {
-        final JsonObject result;
-        try {
-            String url = String.format("%s/api/apps/set_user_storage?access_token=%s&openid=%s&sig_method=%s&signature=%s",
-                    host,
-                    tt_access_token,
-                    tt_openid,
-                    tt_sig_method,
-                    tt_signature
-            );
-            JsonObject post_body = (JsonObject) JSON.object2json(tt_body);
-            result = (JsonObject) JSON.parse(AJAX.request(url, "post", post_body.toString()));
-        } catch (Exception e) {
-            ToutiaoError errCode = new ToutiaoError();
-            errCode.setError(9527);
-            errCode.setErrcode(9527);
-            errCode.setErrmsg(e.getMessage());
-            throw errCode;
-        }
-        if (result.has("error") && result.get("error").getAsInt() != 0) {
-            throw JSON.json2object(result, ToutiaoError.class);
-        }
-        return JSON.json2object(result, apps__set_user_storage_response.class);
-    }
+
+//    public apps__set_user_storage_response apps__set_user_storage(String tt_access_token, String tt_openid, String tt_signature, String tt_sig_method, apps__set_user_storage_body tt_body) throws ToutiaoError {
+//        final JsonObject result;
+//        try {
+//            String url = String.format("%s/api/apps/set_user_storage?access_token=%s&openid=%s&sig_method=%s&signature=%s",
+//                    host,
+//                    tt_access_token,
+//                    tt_openid,
+//                    tt_sig_method,
+//                    tt_signature
+//            );
+//            JsonObject post_body = (JsonObject) JSON.object2json(tt_body);
+//            result = (JsonObject) JSON.parse(AJAX.request(url, "post", post_body.toString()));
+//        } catch (Exception e) {
+//            ToutiaoError errCode = new ToutiaoError();
+//            errCode.setError(9527);
+//            errCode.setErrcode(9527);
+//            errCode.setErrmsg(e.getMessage());
+//            throw errCode;
+//        }
+//        if (result.has("error") && result.get("error").getAsInt() != 0) {
+//            throw JSON.json2object(result, ToutiaoError.class);
+//        }
+//        return JSON.json2object(result, apps__set_user_storage_response.class);
+//    }
 
     
-    public apps__remove_user_storage_response apps__remove_user_storage(String tt_access_token, String tt_openid, String tt_signature, String tt_sig_method, apps__remove_user_storage_body tt_body) throws ToutiaoError {
-        final JsonObject result;
-        try {
-            String url = String.format("%s/api/apps/remove_user_storage?access_token=%s&openid=%s&sig_method=%s&signature=%s",
-                    host,
-                    tt_access_token,
-                    tt_openid,
-                    tt_sig_method,
-                    tt_signature);
-            JsonObject post_body = (JsonObject) JSON.object2json(tt_body);
-            result = (JsonObject) JSON.parse(AJAX.request(url, "post", post_body.toString()));
-        } catch (Exception e) {
-            ToutiaoError errCode = new ToutiaoError();
-            errCode.setError(9527);
-            errCode.setErrcode(9527);
-            errCode.setErrmsg(e.getMessage());
-            throw errCode;
-        }
-        if (result.has("error") && result.get("error").getAsInt() != 0) {
-            throw JSON.json2object(result, ToutiaoError.class);
-        }
-        return JSON.json2object(result, apps__remove_user_storage_response.class);
-    }
+//    public apps__remove_user_storage_response apps__remove_user_storage(String tt_access_token, String tt_openid, String tt_signature, String tt_sig_method, apps__remove_user_storage_body tt_body) throws ToutiaoError {
+//        final JsonObject result;
+//        try {
+//            String url = String.format("%s/api/apps/remove_user_storage?access_token=%s&openid=%s&sig_method=%s&signature=%s",
+//                    host,
+//                    tt_access_token,
+//                    tt_openid,
+//                    tt_sig_method,
+//                    tt_signature);
+//            JsonObject post_body = (JsonObject) JSON.object2json(tt_body);
+//            result = (JsonObject) JSON.parse(AJAX.request(url, "post", post_body.toString()));
+//        } catch (Exception e) {
+//            ToutiaoError errCode = new ToutiaoError();
+//            errCode.setError(9527);
+//            errCode.setErrcode(9527);
+//            errCode.setErrmsg(e.getMessage());
+//            throw errCode;
+//        }
+//        if (result.has("error") && result.get("error").getAsInt() != 0) {
+//            throw JSON.json2object(result, ToutiaoError.class);
+//        }
+//        return JSON.json2object(result, apps__remove_user_storage_response.class);
+//    }
 
     
     public byte[] apps__qrcode(apps__qrcode_body tt_body) throws ToutiaoError {
@@ -147,24 +147,24 @@ public class ToutiaoSDK implements ToutiaoAPI {
     }
 
     
-    public apps__game__template__send_response apps__game__template__send(apps__game__template__send_body tt_body) throws ToutiaoError {
-        final JsonObject result;
-        try {
-            String url = String.format("%s/api/apps/game/template/send",host);
-            JsonObject post_body = (JsonObject) JSON.object2json(tt_body);
-            result = (JsonObject) JSON.parse(AJAX.request(url, "post", post_body.toString()));
-        } catch (Exception e) {
-            ToutiaoError errCode = new ToutiaoError();
-            errCode.setError(9527);
-            errCode.setErrcode(9527);
-            errCode.setErrmsg(e.getMessage());
-            throw errCode;
-        }
-        if (result.has("error") && result.get("error").getAsInt() != 0) {
-            throw JSON.json2object(result, ToutiaoError.class);
-        }
-        return JSON.json2object(result, apps__game__template__send_response.class);
-    }
+//    public apps__game__template__send_response apps__game__template__send(apps__game__template__send_body tt_body) throws ToutiaoError {
+//        final JsonObject result;
+//        try {
+//            String url = String.format("%s/api/apps/game/template/send",host);
+//            JsonObject post_body = (JsonObject) JSON.object2json(tt_body);
+//            result = (JsonObject) JSON.parse(AJAX.request(url, "post", post_body.toString()));
+//        } catch (Exception e) {
+//            ToutiaoError errCode = new ToutiaoError();
+//            errCode.setError(9527);
+//            errCode.setErrcode(9527);
+//            errCode.setErrmsg(e.getMessage());
+//            throw errCode;
+//        }
+//        if (result.has("error") && result.get("error").getAsInt() != 0) {
+//            throw JSON.json2object(result, ToutiaoError.class);
+//        }
+//        return JSON.json2object(result, apps__game__template__send_response.class);
+//    }
 
     
     public apps__subscribe_notification__developer__notify_response apps__subscribe_notification__developer__notify(apps__subscribe_notification__developer__notify_body tt_body) throws ToutiaoError {
