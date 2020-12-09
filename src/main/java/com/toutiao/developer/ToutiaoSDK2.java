@@ -45,8 +45,7 @@ public class ToutiaoSDK2 implements ToutiaoAPI2 {
             String url = String.format("%s/api/v2/tags/image/",host);
             result = (JsonObject) JSON.parse(AJAX.request(url, "post", post_body.toString()));
         } catch (Exception e) {
-            ToutiaoError2 errCode = new ToutiaoError2();
-            throw errCode;
+            throw new ToutiaoError2();
         }
         if (result.has("error") && result.get("error").getAsInt() != 0) {
             throw JSON.json2object(result, ToutiaoError2.class);

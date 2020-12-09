@@ -140,7 +140,7 @@ public class ToutiaoSDK implements ToutiaoAPI {
             if (result.has("error") && result.get("error").getAsInt() != 0) {
                 throw JSON.json2object(result, ToutiaoError.class);
             }
-        } catch (Exception e) {
+        } catch (Exception ignored) {
 
         }
         return bytes;

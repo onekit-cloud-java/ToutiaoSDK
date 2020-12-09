@@ -17,7 +17,8 @@ import java.util.ArrayList;
 @RequestMapping("/")
 
 public class Demo {
-    private final String sig_method = "hmac_sha256";
+
+    //private final String sig_method = "hmac_sha256";
     private ToutiaoSDK sdk = new ToutiaoSDK("http://localhost:10041");
     private ToutiaoSDK2 sdk2 = new ToutiaoSDK2("http://localhost:10041");
 
