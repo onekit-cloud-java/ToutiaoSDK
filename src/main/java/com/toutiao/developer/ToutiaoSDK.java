@@ -20,6 +20,7 @@ public class ToutiaoSDK implements ToutiaoAPI {
     public String _decrypt(String tt_encryptedData,String tt_iv,String tt_session_key) throws Exception {
         return new CRYPTO(CRYPTO.Key.AES, CRYPTO.Mode.PKCS5,128).decrypt(tt_encryptedData,tt_iv,tt_session_key);
     }
+
     public apps__token_response apps__token(String tt_appid, String tt_secret, String tt_grant_type) throws ToutiaoError {
         final JsonObject result;
         try {

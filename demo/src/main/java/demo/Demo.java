@@ -1,6 +1,8 @@
 package demo;
 
 import cn.onekit.thekit.JSON;
+import com.toutiao.developer.ToutiaoResponse;
+import com.toutiao.developer.ToutiaoX;
 import com.toutiao.developer.entity.*;
 import com.toutiao.developer.entity.v2.*;
 import com.toutiao.developer.ToutiaoSDK;
@@ -20,6 +22,8 @@ public class Demo {
 
     private ToutiaoSDK sdk = new ToutiaoSDK("https://developer.toutiao.com");
     private ToutiaoSDK2 sdk2 = new ToutiaoSDK2("https://developer.toutiao.com");
+    private ToutiaoX toutiaoX = new ToutiaoX();
+
 
     @RequestMapping("/decrypt")
     public String decrypt(
@@ -38,6 +42,21 @@ public class Demo {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @RequestMapping
+    public ToutiaoResponse checksession(
+            @RequestParam String  tt_sig_method,
+            @RequestParam String tt_session_key,
+            @RequestParam String tt_body,
+            @RequestParam String tt_access_token,
+            @RequestParam String tt_openid
+    ) throws Exception {
+        String signature = sdk._signBody(tt_sig_method, tt_session_key,tt_body);
+
+        return toutiaoX.checksession(tt_access_token,tt_openid,signature,tt_sig_method,tt_body);
+
+
     }
 
     @RequestMapping("/getAccessToken")
