@@ -5,11 +5,12 @@ import cn.onekit.thekit.JSON;
 import cn.onekit.thekit.SIGN;
 
 
-public class ToutiaoX {
+public class ToutiaoX extends ToutiaoSDK{
 
-    public ToutiaoResponse checksession(String tt_session_key,String tt_sig_method,String tt_body) throws Exception {
+    public void checksession(String tt_access_token,String tt_openid,String tt_signature,String tt_sig_method,String tt_body) throws Exception {
 
-         return JSON.string2object(_signBody(tt_sig_method,tt_session_key,tt_body),ToutiaoResponse.class);
+     //   String tt_session_key =
+       //  if(_signBody(tt_sig_method,tt_session_key,tt_body).equals();
 
 
     }
