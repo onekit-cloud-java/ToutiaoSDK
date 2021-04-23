@@ -155,7 +155,6 @@ public class ToutiaoV1SDK implements ToutiaoV1API {
         try {
             AJAX.headers = new HashMap<String, String>() {{
                 put("Content-Type", "application/json");
-
             }};
             apiAppsSubscribeNotificationDeveloperNotifyRequest.setApp_id(appid);
             String url = String.format("%s/api/apps/subscribe_notification/developer/v1/notify",host);
